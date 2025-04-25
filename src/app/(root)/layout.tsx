@@ -1,7 +1,14 @@
+import Footer from "@/components/layouts/Footer";
+
 export default function HomeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div>{children}</div>;
+  return (
+    <main>
+      {children}
+      <Footer />
+    </main>
+  );
 }
