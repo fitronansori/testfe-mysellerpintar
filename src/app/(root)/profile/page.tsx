@@ -6,7 +6,7 @@ import Link from "next/link";
 const UserProfilePage = () => {
   return (
     <div>
-      <Header />
+      <Header className="sticky" />
       <div className="w-full h-[calc(100vh-192px)] flex items-center justify-center">
         <section className="w-[400px] p-4 flex flex-col items-center justify-center gap-6">
           <h3 className="text-xl text-gray-900 font-semibold">User Profile</h3>
