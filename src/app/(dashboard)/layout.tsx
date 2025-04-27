@@ -14,7 +14,7 @@ export default async function DashboardLayout({
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
-      <main className="w-full">{children}</main>
+      <main className="w-full bg-[#f3f4f6]">{children}</main>
     </SidebarProvider>
   );
 }

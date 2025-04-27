@@ -1,10 +1,10 @@
 import DasboardHeader from "@/components/layouts/AppSidebar/DashboardHeader";
+
 import {
-  Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from "@/components/ui/card";
 
 import {
@@ -18,6 +18,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -27,8 +29,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import DashboardCard from "@/components/layouts/DashboardCard";
 
 const blogPosts = [
   {
@@ -109,12 +110,13 @@ const DashboardPage = () => {
       <DasboardHeader pageName="Articles" />
 
       <div className="p-6">
-        <Card className="p-0 gap-0">
+        <DashboardCard>
           <CardHeader className="p-6">
             <CardTitle className="font-medium">Total Articles : 25</CardTitle>
           </CardHeader>
+
           <CardContent className="p-0 border-t">
-            <div className="p-6 bg-white flex items-center justify-between">
+            <div className="p-6 bg-gray-50 flex items-center justify-between">
               <div>Search Function</div>
               <Button asChild>
                 <Link href="/dashboard/create">
@@ -191,6 +193,7 @@ const DashboardPage = () => {
               </TableBody>
             </Table>
           </CardContent>
+
           <CardFooter className="p-6">
             <Pagination>
               <PaginationContent>
@@ -209,7 +212,7 @@ const DashboardPage = () => {
               </PaginationContent>
             </Pagination>
           </CardFooter>
-        </Card>
+        </DashboardCard>
       </div>
     </section>
   );

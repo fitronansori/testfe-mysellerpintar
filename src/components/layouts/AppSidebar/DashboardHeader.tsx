@@ -23,7 +23,7 @@ const DasboardHeader = ({ pageName, className }: HeaderProps) => {
   return (
     <header
       className={cn(
-        "h-[68px] w-full transition-colors duration-300 z-50 bg-white border-b",
+        "h-[68px] w-full transition-colors duration-300 z-50 bg-gray-50 border-b",
         className
       )}
     >
