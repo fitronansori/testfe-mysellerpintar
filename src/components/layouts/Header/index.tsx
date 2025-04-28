@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, User } from "lucide-react";
+import { LayoutDashboard, LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/auth-context";
@@ -29,6 +29,8 @@ const Header = ({ className }: HeaderProps) => {
   const isHome = pathname === "/";
   const { user, isAuthenticated, logout } = useAuth();
   const router = useRouter();
+
+  const isAdmin = user?.role === "Admin";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,6 +83,14 @@ const Header = ({ className }: HeaderProps) => {
                   <User className="h-4 w-4" /> Profile
                 </DropdownMenuItem>
               </Link>
+
+              {isAdmin && (
+                <Link href={"/dashboard"}>
+                  <DropdownMenuItem>
+                    <LayoutDashboard className="h-4 w-4" /> Dashboard
+                  </DropdownMenuItem>
+                </Link>
+              )}
               <DropdownMenuItem
                 className="text-destructive"
                 onClick={handleLogout}

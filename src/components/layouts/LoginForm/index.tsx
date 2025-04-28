@@ -49,7 +49,7 @@ const LoginForm = () => {
         toast("Login successful", {
           description: "Welcome back!",
         });
-        router.push("/dashboard");
+        router.push("/");
         router.refresh();
       } else {
         toast("Login failed", {

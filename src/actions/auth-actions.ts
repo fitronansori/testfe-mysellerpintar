@@ -131,3 +131,13 @@ export async function getAuthStatus() {
   const token = (await cookies()).get("auth_token")?.value;
   return !!token;
 }
+
+export async function isAdmin() {
+  const { success, user } = await getProfile();
+
+  if (!success || !user) {
+    return false;
+  }
+
+  return user.role === "Admin";
+}

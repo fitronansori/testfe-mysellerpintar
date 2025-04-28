@@ -11,7 +11,7 @@ const Articles = async ({
   category?: string;
   search?: string;
 }) => {
-  const limit = 10;
+  const limit = 9;
 
   const { data, total } = await fetchArticles(
     initialPage,

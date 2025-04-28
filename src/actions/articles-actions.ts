@@ -10,7 +10,7 @@ import { cache } from "react";
 export const fetchArticles = cache(
   async (
     page = 1,
-    limit = 10,
+    limit = 9,
     category?: string,
     search?: string
   ): Promise<{ data: Article[]; total: number }> => {
