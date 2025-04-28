@@ -11,6 +11,7 @@ const Hero = () => {
         width={1920}
         height={1277}
         className="absolute inset-0 overflow-hidden -z-20 size-full object-cover"
+        priority
       />
       <div className="absolute inset-0 bg-primary opacity-85 -z-10"></div>
       <Header />

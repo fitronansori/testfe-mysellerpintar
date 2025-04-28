@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import QueryProvider from "@/components/QueryProvider";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("antialiased", archivo.variable)}>{children}</body>
+      <body className={cn("antialiased", archivo.variable)}>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
