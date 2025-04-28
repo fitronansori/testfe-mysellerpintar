@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import QueryProvider from "@/components/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/contexts/auth-context";
 
@@ -25,10 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn("antialiased", archivo.variable)}>
         <AuthProvider>
-          <QueryProvider>
-            <Toaster />
-            {children}
-          </QueryProvider>
+          <Toaster />
+          {children}
         </AuthProvider>
       </body>
     </html>
