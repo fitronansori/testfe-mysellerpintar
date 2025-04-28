@@ -1,9 +1,14 @@
+"use client";
+
 import UserAvatar from "@/components/common/user-avatar";
 import Header from "@/components/layouts/Header";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/auth-context";
 import Link from "next/link";
 
-const UserProfilePage = async () => {
+const UserProfilePage = () => {
+  const { user } = useAuth();
+
   return (
     <div>
       <Header className="sticky" />
@@ -17,7 +22,7 @@ const UserProfilePage = async () => {
             <div className="bg-gray-100 w-full p-3 rounded-[6px] flex items-center gap-4">
               <p className="text-gray-900 font-semibold">Username</p>
               <p>:</p>
-              <p className="text-center">asdasdaas</p>
+              <p className="text-center">{user?.username}</p>
             </div>
 
             <div className="bg-gray-100 w-full p-3 rounded-[6px] flex items-center gap-4">
@@ -27,9 +32,9 @@ const UserProfilePage = async () => {
             </div>
 
             <div className="bg-gray-100 w-full p-3 rounded-[6px] flex items-center gap-4">
-              <p className="text-gray-900 font-semibold">asdasd</p>
+              <p className="text-gray-900 font-semibold">Role</p>
               <p>:</p>
-              <p className="text-center">User</p>
+              <p className="text-center">{user?.role}</p>
             </div>
           </div>
 

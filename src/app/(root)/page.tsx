@@ -13,12 +13,6 @@ const Home = async ({
   const category = resolvedParams.category || "";
   const search = resolvedParams.search || "";
 
-  console.log("Home page rendering with search params:", {
-    page,
-    category,
-    search,
-  });
-
   return (
     <>
       <Hero />

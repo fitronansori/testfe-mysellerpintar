@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Logo from "@/components/common/blog-logo";
 import UserAvatar from "@/components/common/user-avatar";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -17,6 +17,7 @@ import {
 import { LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/auth-context";
 
 type HeaderProps = {
   className?: string;
@@ -24,21 +25,25 @@ type HeaderProps = {
 
 const Header = ({ className }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
-
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const user = false;
+  const { user, isAuthenticated, logout } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/login");
+  };
 
   return (
     <header
@@ -53,18 +58,18 @@ const Header = ({ className }: HeaderProps) => {
           {isHome && !isScrolled ? <Logo typeLogo="white" /> : <Logo />}
         </div>
 
-        {user ? (
+        {isAuthenticated ? (
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:outline-none focus:ring-[2px] focus:ring-offset-2 focus:ring-primary rounded-full">
               <div className="flex items-center gap-2 cursor-pointer">
-                <UserAvatar />
+                <UserAvatar textFallback={user?.username} />
                 <p
                   className={cn(
-                    "hidden md:block font-medium underline",
+                    "hidden md:block font-medium underline capitalize",
                     isHome && !isScrolled ? "text-white" : "text-slate-900"
                   )}
                 >
-                  Ansori Dev
+                  {user?.username}
                 </p>
               </div>
             </DropdownMenuTrigger>
@@ -76,7 +81,10 @@ const Header = ({ className }: HeaderProps) => {
                   <User className="h-4 w-4" /> Profile
                 </DropdownMenuItem>
               </Link>
-              <DropdownMenuItem className="text-destructive">
+              <DropdownMenuItem
+                className="text-destructive"
+                onClick={handleLogout}
+              >
                 <LogOut className="h-4 w-4 text-destructive" /> Logout
               </DropdownMenuItem>
             </DropdownMenuContent>

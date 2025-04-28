@@ -17,9 +17,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { login } from "@/actions/auth-actions";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -34,7 +40,29 @@ const LoginForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
-    console.log("Form submitted:", values);
+    setIsLoading(true);
+
+    try {
+      const result = await login(values.username, values.password);
+
+      if (result.success) {
+        toast("Login successful", {
+          description: "Welcome back!",
+        });
+        router.push("/dashboard");
+        router.refresh();
+      } else {
+        toast("Login failed", {
+          description: "Try again",
+        });
+      }
+    } catch (error) {
+      toast("An unexpected error occurred", {
+        description: `Please try again later ${error}`,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -82,7 +110,7 @@ const LoginForm = () => {
           )}
         />
 
-        <Button className="w-full mt-3" type="submit">
+        <Button className="w-full mt-3" type="submit" disabled={isLoading}>
           Login
         </Button>
       </form>

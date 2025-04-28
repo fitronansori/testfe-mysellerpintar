@@ -12,11 +12,6 @@ const Articles = async ({
   search?: string;
 }) => {
   const limit = 10;
-  console.log("Articles component rendering with:", {
-    initialPage,
-    category,
-    search,
-  });
 
   const { data, total } = await fetchArticles(
     initialPage,

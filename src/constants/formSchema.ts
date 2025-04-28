@@ -18,5 +18,5 @@ export const registerSchema = z.object({
     })
     .max(50),
   password: z.string().min(8).max(50),
-  role: z.enum(["admin", "user"]),
+  role: z.enum(["Admin", "User"]),
 });

@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import QueryProvider from "@/components/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/contexts/auth-context";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -23,10 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("antialiased", archivo.variable)}>
-        <QueryProvider>
-          <Toaster />
-          {children}
-        </QueryProvider>
+        <AuthProvider>
+          <QueryProvider>
+            <Toaster />
+            {children}
+          </QueryProvider>
+        </AuthProvider>
       </body>
     </html>
   );

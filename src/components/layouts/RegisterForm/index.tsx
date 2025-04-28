@@ -26,9 +26,14 @@ import {
 } from "@/components/ui/select";
 
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { register } from "@/actions/auth-actions";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -39,13 +44,39 @@ const RegisterForm = () => {
     defaultValues: {
       username: "",
       password: "",
-      role: "user",
+      role: "User",
     },
   });
 
   async function onSubmit(values: z.infer<typeof registerSchema>) {
-    console.log("Form submitted:", values);
+    setIsLoading(true);
+
+    try {
+      const result = await register(
+        values.username,
+        values.password,
+        values.role
+      );
+
+      if (result.success) {
+        toast("Registration successful", {
+          description: "You can now log in",
+        });
+        router.push("/login");
+      } else {
+        toast("Registration failed", {
+          description: "Please try again",
+        });
+      }
+    } catch (error) {
+      toast("An unexpected error occurred", {
+        description: `Please try again later ${error}`,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -104,8 +135,8 @@ const RegisterForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="user">user</SelectItem>
-                  <SelectItem value="admin">admin</SelectItem>
+                  <SelectItem value="User">user</SelectItem>
+                  <SelectItem value="Admin">admin</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -113,7 +144,7 @@ const RegisterForm = () => {
           )}
         />
 
-        <Button className="w-full mt-3" type="submit">
+        <Button className="w-full mt-3" type="submit" disabled={isLoading}>
           Register
         </Button>
       </form>
