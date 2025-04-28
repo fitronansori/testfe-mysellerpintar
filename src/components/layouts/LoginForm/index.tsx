@@ -4,7 +4,7 @@ import { useState } from "react";
 import { loginSchema } from "@/constants/formSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,11 +16,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -33,9 +33,10 @@ const LoginForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    console.log("Form submitted:", values);
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -67,7 +68,7 @@ const LoginForm = () => {
                     className="border-0 focus-visible:ring-0 shadow-none"
                     {...field}
                   />
-                  <button onClick={togglePasswordVisibility}>
+                  <button type="button" onClick={togglePasswordVisibility}>
                     {showPassword ? (
                       <EyeOffIcon className="size-5 text-muted-foreground" />
                     ) : (
@@ -88,4 +89,5 @@ const LoginForm = () => {
     </Form>
   );
 };
+
 export default LoginForm;

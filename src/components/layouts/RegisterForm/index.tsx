@@ -29,6 +29,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -38,11 +39,12 @@ const RegisterForm = () => {
     defaultValues: {
       username: "",
       password: "",
+      role: "user",
     },
   });
 
-  function onSubmit(values: z.infer<typeof registerSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof registerSchema>) {
+    console.log("Form submitted:", values);
   }
   return (
     <Form {...form}>

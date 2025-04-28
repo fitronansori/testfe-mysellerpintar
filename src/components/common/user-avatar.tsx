@@ -7,10 +7,13 @@ type UserAvatarProps = {
 };
 
 const UserAvatar = ({ className, textClassName }: UserAvatarProps) => {
+  const user = "Fitron";
+
+  const firstLetter = user.charAt(0).toUpperCase();
   return (
     <Avatar className={cn("", className)}>
       <AvatarFallback className={cn("bg-slate-500 text-white", textClassName)}>
-        C
+        {firstLetter}
       </AvatarFallback>
     </Avatar>
   );

@@ -27,7 +27,7 @@ const Header = ({ className }: HeaderProps) => {
 
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const login = false;
+  const user = false;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +53,7 @@ const Header = ({ className }: HeaderProps) => {
           {isHome && !isScrolled ? <Logo typeLogo="white" /> : <Logo />}
         </div>
 
-        {login ? (
+        {user ? (
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:outline-none focus:ring-[2px] focus:ring-offset-2 focus:ring-primary rounded-full">
               <div className="flex items-center gap-2 cursor-pointer">

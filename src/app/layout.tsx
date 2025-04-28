@@ -3,6 +3,7 @@ import { Archivo } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import QueryProvider from "@/components/QueryProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -22,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("antialiased", archivo.variable)}>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <Toaster />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

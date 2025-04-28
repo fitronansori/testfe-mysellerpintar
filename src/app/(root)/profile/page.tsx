@@ -3,7 +3,7 @@ import Header from "@/components/layouts/Header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const UserProfilePage = () => {
+const UserProfilePage = async () => {
   return (
     <div>
       <Header className="sticky" />
@@ -17,17 +17,17 @@ const UserProfilePage = () => {
             <div className="bg-gray-100 w-full p-3 rounded-[6px] flex items-center gap-4">
               <p className="text-gray-900 font-semibold">Username</p>
               <p>:</p>
-              <p className="text-center">Ansori Dev</p>
+              <p className="text-center">asdasdaas</p>
             </div>
 
             <div className="bg-gray-100 w-full p-3 rounded-[6px] flex items-center gap-4">
               <p className="text-gray-900 font-semibold">Passoword</p>
               <p>:</p>
-              <p className="text-center">User 123</p>
+              <p className="text-center">Rahasia</p>
             </div>
 
             <div className="bg-gray-100 w-full p-3 rounded-[6px] flex items-center gap-4">
-              <p className="text-gray-900 font-semibold">Role</p>
+              <p className="text-gray-900 font-semibold">asdasd</p>
               <p>:</p>
               <p className="text-center">User</p>
             </div>
